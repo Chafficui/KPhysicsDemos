@@ -12,3 +12,5 @@ To run the demos yourself simply clone the KPhysicsDemo repository and run the M
 ![Chains Demo](https://i.postimg.cc/50Ggn2qL/Chains.png "Chains")
 ![Particle Demo](https://i.postimg.cc/ZKgmp8d5/Particle-explosion-demo.png "Particles")
 ![Shadow Demo](https://i.postimg.cc/13qQH8Gc/Shadow-casting.png "Shadows")
+
+# Almost all demos are made by HaydenMarshalla in [JPhysics](https://github.com/HaydenMarshalla/JPhysics)
