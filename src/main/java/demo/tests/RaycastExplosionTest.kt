@@ -1,9 +1,9 @@
 package demo.tests
 
+import de.chaffic.dynamics.World
+import de.chaffic.explosions.RaycastExplosion
+import de.chaffic.math.Vec2
 import demo.window.TestBedWindow
-import library.dynamics.World
-import library.explosions.RaycastExplosion
-import library.math.Vec2
 
 object RaycastExplosionTest {
     @JvmField

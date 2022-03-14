@@ -1,10 +1,10 @@
 package demo.tests
 
+import de.chaffic.dynamics.Body
+import de.chaffic.dynamics.World
+import de.chaffic.geometry.Polygon
+import de.chaffic.math.Vec2
 import demo.window.TestBedWindow
-import library.dynamics.Body
-import library.dynamics.World
-import library.geometry.Polygon
-import library.math.Vec2
 
 object StackedObjects {
     @JvmField
@@ -23,11 +23,11 @@ object StackedObjects {
             }
             for (x in 0..14) {
                 val b = Body(Polygon(10.0, 10.0), (-140 + x * 20).toDouble(), 400.0)
-                b.setDensity(10.0)
+                b.density = (10.0)
                 temp.addBody(b)
             }
             val b = Body(Polygon(150.0, 10.0), .0, -120.0)
-            b.setDensity(0.0)
+            b.density = (0.0)
             temp.addBody(b)
         }
     }

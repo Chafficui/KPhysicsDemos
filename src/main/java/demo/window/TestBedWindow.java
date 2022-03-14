@@ -1,25 +1,29 @@
 package demo.window;
 
+import de.chaffic.collision.AxisAlignedBoundingBox;
+import de.chaffic.collision.bodies.CollisionBody;
+import de.chaffic.collision.bodies.CollisionBodyInterface;
+import de.chaffic.dynamics.Body;
+import de.chaffic.dynamics.World;
+import de.chaffic.dynamics.bodies.PhysicalBodyInterface;
+import de.chaffic.explosions.Explosion;
+import de.chaffic.explosions.ParticleExplosion;
+import de.chaffic.explosions.ProximityExplosion;
+import de.chaffic.explosions.RaycastExplosion;
+import de.chaffic.geometry.Circle;
+import de.chaffic.geometry.Polygon;
+import de.chaffic.geometry.bodies.TranslatableBody;
+import de.chaffic.joints.Joint;
+import de.chaffic.math.Vec2;
+import de.chaffic.rays.Ray;
+import de.chaffic.rays.ShadowCasting;
+import de.chaffic.rays.Slice;
 import demo.input.*;
 import demo.tests.Chains;
 import demo.tests.Raycast;
 import demo.utils.ColourSettings;
 import demo.utils.Painter;
 import demo.utils.Trail;
-import library.collision.AxisAlignedBoundingBox;
-import library.dynamics.Body;
-import library.dynamics.World;
-import library.explosions.Explosion;
-import library.explosions.ParticleExplosion;
-import library.explosions.ProximityExplosion;
-import library.explosions.RaycastExplosion;
-import library.geometry.Circle;
-import library.geometry.Polygon;
-import library.joints.Joint;
-import library.math.Vec2;
-import library.rays.Ray;
-import library.rays.ShadowCasting;
-import library.rays.Slice;
 
 import javax.swing.*;
 import java.awt.*;
@@ -296,16 +300,18 @@ public class TestBedWindow extends JPanel implements Runnable {
             Painter.shadowDraw(g2d, PAINT_SETTINGS, CAMERA, s);
         }
         drawTrails(g2d);
-        for (Body b : world.getBodies()) {
+        for (TranslatableBody b : world.getBodies()) {
             if (PAINT_SETTINGS.getDrawShapes()) {
-                if(b.getShape() instanceof Circle) Painter.circleDraw(g2d, PAINT_SETTINGS, CAMERA, b);
-                else if(b.getShape() instanceof Polygon) Painter.polygonDraw(g2d, PAINT_SETTINGS, CAMERA, b);
+                if(b instanceof CollisionBodyInterface collider) {
+                    if (collider.getShape() instanceof Circle) Painter.circleDraw(g2d, PAINT_SETTINGS, CAMERA, collider);
+                    else if (collider.getShape() instanceof Polygon) Painter.polygonDraw(g2d, PAINT_SETTINGS, CAMERA, collider);
+                }
             }
-            if (PAINT_SETTINGS.getDrawAABBs()) {
-                Painter.drawAABB(g2d, PAINT_SETTINGS, CAMERA, b);
+            if (PAINT_SETTINGS.getDrawAABBs() && b instanceof CollisionBody) {
+                Painter.drawAABB(g2d, PAINT_SETTINGS, CAMERA, (CollisionBody) b);
             }
-            if (PAINT_SETTINGS.getDrawCOMs()) {
-                Painter.drawCOMS(g2d, PAINT_SETTINGS, CAMERA, b);
+            if (PAINT_SETTINGS.getDrawCOMs() && b instanceof CollisionBody) {
+                Painter.drawCOMS(g2d, PAINT_SETTINGS, CAMERA, (CollisionBody) b);
             }
         }
         if (PAINT_SETTINGS.getDrawContacts()) {
@@ -597,8 +603,9 @@ public class TestBedWindow extends JPanel implements Runnable {
     }
 
     private boolean overlap(Body b) {
-        for (Body a : world.getBodies()) {
-            if (AxisAlignedBoundingBox.aabbOverlap(a, b)) {
+        for (TranslatableBody a : world.getBodies()) {
+            if(a instanceof CollisionBody cA)
+            if (AxisAlignedBoundingBox.aabbOverlap(cA, b)) {
                 return false;
             }
         }
@@ -627,8 +634,10 @@ public class TestBedWindow extends JPanel implements Runnable {
     }
 
     public void setStaticWorldBodies() {
-        for (Body b : world.getBodies()) {
-            b.setDensity(0);
+        for (TranslatableBody b : world.getBodies()) {
+            if(b instanceof PhysicalBodyInterface bP) {
+                bP.setDensity(0);
+            }
         }
     }
 
@@ -740,17 +749,21 @@ public class TestBedWindow extends JPanel implements Runnable {
 
     //Removes friction from the world
     public void setWorldIce() {
-        for (Body b : world.getBodies()) {
-            b.setStaticFriction(0.0);
-            b.setDynamicFriction(0.0);
+        for (TranslatableBody b : world.getBodies()) {
+            if(b instanceof CollisionBodyInterface cB) {
+                cB.setStaticFriction(0.0);
+                cB.setDynamicFriction(0.0);
+            }
         }
     }
 
     // Scaled friction by a passed ratio
     public void scaleWorldFriction(double ratio) {
-        for (Body b : world.getBodies()) {
-            b.setStaticFriction(b.getStaticFriction() * ratio);
-            b.setDynamicFriction(b.getDynamicFriction() * ratio);
+        for (TranslatableBody b : world.getBodies()) {
+            if(b instanceof CollisionBodyInterface cB) {
+                cB.setStaticFriction(cB.getStaticFriction() * ratio);
+                cB.setDynamicFriction(cB.getDynamicFriction() * ratio);
+            }
         }
     }
 

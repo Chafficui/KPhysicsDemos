@@ -1,11 +1,11 @@
 package demo.tests
 
+import de.chaffic.dynamics.Body
+import de.chaffic.dynamics.World
+import de.chaffic.geometry.Circle
+import de.chaffic.geometry.Polygon
+import de.chaffic.math.Vec2
 import demo.window.TestBedWindow
-import library.dynamics.Body
-import library.dynamics.World
-import library.geometry.Circle
-import library.geometry.Polygon
-import library.math.Vec2
 
 object Drag {
     @JvmField
@@ -21,7 +21,7 @@ object Drag {
             b1.restitution = .0
         }
         val b4 = Body(Polygon(200.0, 10.0), .0, -100.0)
-        b4.setDensity(0.0)
+        b4.density = (0.0)
         b4.restitution = 1.0
         temp.addBody(b4)
     }

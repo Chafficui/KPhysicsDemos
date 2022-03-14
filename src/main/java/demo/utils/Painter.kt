@@ -1,20 +1,21 @@
 package demo.utils
 
+import de.chaffic.collision.bodies.CollisionBodyInterface
+import de.chaffic.dynamics.World
+import de.chaffic.dynamics.bodies.PhysicalBodyInterface
+import de.chaffic.explosions.ProximityExplosion
+import de.chaffic.explosions.RayScatter
+import de.chaffic.explosions.RaycastExplosion
+import de.chaffic.geometry.Circle
+import de.chaffic.geometry.Polygon
+import de.chaffic.joints.Joint
+import de.chaffic.joints.JointToBody
+import de.chaffic.joints.JointToPoint
+import de.chaffic.math.Vec2
+import de.chaffic.rays.Ray
+import de.chaffic.rays.ShadowCasting
+import de.chaffic.rays.Slice
 import demo.window.Camera
-import library.dynamics.Body
-import library.dynamics.World
-import library.explosions.ProximityExplosion
-import library.explosions.RayScatter
-import library.explosions.RaycastExplosion
-import library.geometry.Circle
-import library.geometry.Polygon
-import library.joints.Joint
-import library.joints.JointToBody
-import library.joints.JointToPoint
-import library.math.Vec2
-import library.rays.Ray
-import library.rays.ShadowCasting
-import library.rays.Slice
 import java.awt.Graphics2D
 import java.awt.geom.Ellipse2D
 import java.awt.geom.Line2D
@@ -122,7 +123,7 @@ object Painter {
      * @param camera        Camera class used to convert points from world space to view space
      */
     @JvmStatic
-    fun drawAABB(g: Graphics2D, paintSettings: ColourSettings, camera: Camera, body: Body) {
+    fun drawAABB(g: Graphics2D, paintSettings: ColourSettings, camera: Camera, body: CollisionBodyInterface) {
         g.color = paintSettings.aabb
         val polyBB: Path2D = Path2D.Double()
         val min = camera.convertToScreen(body.aabb.min.plus(body.position))
@@ -143,7 +144,7 @@ object Painter {
      * @param camera        Camera class used to convert points from world space to view space
      */
     @JvmStatic
-    fun drawCOMS(g: Graphics2D, paintSettings: ColourSettings, camera: Camera, body: Body) {
+    fun drawCOMS(g: Graphics2D, paintSettings: ColourSettings, camera: Camera, body: CollisionBodyInterface) {
         g.color = paintSettings.centreOfMass
         val centre = body.position
         val line = Vec2(paintSettings.COM_RADIUS.toDouble(), .0)
@@ -166,7 +167,7 @@ object Painter {
      * @param camera        Camera class used to convert points from world space to view space
      */
     @JvmStatic
-    fun polygonDraw(g: Graphics2D, paintSettings: ColourSettings, camera: Camera, body: Body) {
+    fun polygonDraw(g: Graphics2D, paintSettings: ColourSettings, camera: Camera, body: CollisionBodyInterface) {
         val polygon = body.shape as Polygon
         val s = Path2D.Double()
         for (i in polygon.vertices.indices) {
@@ -181,7 +182,7 @@ object Painter {
             }
         }
         s.closePath()
-        if (body.mass == 0.0) {
+        if (body is PhysicalBodyInterface && body.mass == 0.0) {
             g.color = paintSettings.staticFill
             g.fill(s)
             g.color = paintSettings.staticOutLine
@@ -201,8 +202,8 @@ object Painter {
      * @param camera        Camera class used to convert points from world space to view space
      */
     @JvmStatic
-    fun circleDraw(g: Graphics2D, paintSettings: ColourSettings, camera: Camera, body: Body) {
-        if (body.mass == 0.0) {
+    fun circleDraw(g: Graphics2D, paintSettings: ColourSettings, camera: Camera, body: CollisionBodyInterface) {
+        if (body is PhysicalBodyInterface && body.mass == 0.0) {
             g.color = paintSettings.staticFill
         } else {
             g.color = paintSettings.shapeFill
@@ -217,7 +218,7 @@ object Painter {
                 2 * drawnRadius
             )
         )
-        if (body.mass == 0.0) {
+        if (body is PhysicalBodyInterface && body.mass == 0.0) {
             g.color = paintSettings.staticOutLine
         } else {
             g.color = paintSettings.shapeOutLine

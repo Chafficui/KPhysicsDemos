@@ -1,10 +1,10 @@
 package demo.tests
 
+import de.chaffic.dynamics.Body
+import de.chaffic.dynamics.World
+import de.chaffic.geometry.Polygon
+import de.chaffic.math.Vec2
 import demo.window.TestBedWindow
-import library.dynamics.Body
-import library.dynamics.World
-import library.geometry.Polygon
-import library.math.Vec2
 
 object Friction {
     @JvmField
@@ -19,7 +19,7 @@ object Friction {
                 val ramp =
                     world.addBody(Body(Polygon(200.0, 10.0), (-200 + 200 * i).toDouble(), (200 - 180 * i).toDouble()))
                 ramp.orientation = -0.2
-                ramp.setDensity(0.0)
+                ramp.density = (0.0)
             }
             for (i in 0..2) {
                 val box =
@@ -27,7 +27,7 @@ object Friction {
                 box.orientation = -0.2
                 box.staticFriction = 0.5 - i * 0.1
                 box.dynamicFriction = 0.3 - i * 0.1
-                box.setDensity(1.0)
+                box.density = (1.0)
             }
         }
     }

@@ -1,12 +1,12 @@
 package demo.tests
 
+import de.chaffic.dynamics.Body
+import de.chaffic.dynamics.World
+import de.chaffic.geometry.Circle
+import de.chaffic.joints.Joint
+import de.chaffic.joints.JointToPoint
+import de.chaffic.math.Vec2
 import demo.window.TestBedWindow
-import library.dynamics.Body
-import library.dynamics.World
-import library.geometry.Circle
-import library.joints.Joint
-import library.joints.JointToPoint
-import library.math.Vec2
 
 object NewtonsCradle {
     @JvmField

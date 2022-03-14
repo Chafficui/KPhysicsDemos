@@ -1,10 +1,10 @@
 package demo.tests
 
+import de.chaffic.dynamics.Body
+import de.chaffic.dynamics.World
+import de.chaffic.geometry.Polygon
+import de.chaffic.math.Vec2
 import demo.window.TestBedWindow
-import library.dynamics.Body
-import library.dynamics.World
-import library.geometry.Polygon
-import library.math.Vec2
 
 object SliceObjects {
     @JvmField
@@ -18,7 +18,7 @@ object SliceObjects {
         val temp = testBedWindow.world
         testBedWindow.setCamera(Vec2(.0, 100.0), 1.3)
         val ground = Body(Polygon(10000.0, 2000.0), .0, -2040.0)
-        ground.setDensity(0.0)
+        ground.density = (0.0)
         temp.addBody(ground)
         testBedWindow.createTower(5, 0, -40)
         testBedWindow.scaleWorldFriction(0.4)

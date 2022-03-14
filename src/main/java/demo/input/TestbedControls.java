@@ -1,11 +1,11 @@
 package demo.input;
 
+import de.chaffic.explosions.ParticleExplosion;
+import de.chaffic.explosions.ProximityExplosion;
+import de.chaffic.math.Vec2;
 import demo.tests.*;
 import demo.window.Camera;
 import demo.window.TestBedWindow;
-import library.explosions.ParticleExplosion;
-import library.explosions.ProximityExplosion;
-import library.math.Vec2;
 
 import java.awt.event.MouseEvent;
 

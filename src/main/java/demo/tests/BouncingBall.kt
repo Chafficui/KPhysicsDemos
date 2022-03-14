@@ -1,11 +1,11 @@
 package demo.tests
 
+import de.chaffic.dynamics.Body
+import de.chaffic.dynamics.World
+import de.chaffic.geometry.Circle
+import de.chaffic.geometry.Polygon
+import de.chaffic.math.Vec2
 import demo.window.TestBedWindow
-import library.dynamics.Body
-import library.dynamics.World
-import library.geometry.Circle
-import library.geometry.Polygon
-import library.math.Vec2
 
 object BouncingBall {
     @JvmField
@@ -30,19 +30,19 @@ object BouncingBall {
                     } else {
                         Body(Circle(2.0), (5 * 20 - x * 20).toDouble(), (10 + y * 20).toDouble())
                     }
-                    b.setDensity(0.0)
+                    b.density = 0.0
                     temp.addBody(b)
                 }
             }
         }
         val b1 = Body(Polygon(5.0, 190.0), -100.0, 190.0)
-        b1.setDensity(0.0)
+        b1.density = (0.0)
         temp.addBody(b1)
         val b2 = Body(Polygon(5.0, 190.0), 100.0, 190.0)
-        b2.setDensity(0.0)
+        b2.density = (0.0)
         temp.addBody(b2)
         val b3 = Body(Polygon(105.0, 5.0), .0, -5.0)
-        b3.setDensity(0.0)
+        b3.density = (0.0)
         temp.addBody(b3)
     }
 }

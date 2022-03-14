@@ -1,6 +1,6 @@
 package demo.window;
 
-import library.math.Vec2;
+import de.chaffic.math.Vec2;
 
 public class Camera {
     private final double aspectRatio;

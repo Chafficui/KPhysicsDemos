@@ -1,12 +1,12 @@
 package demo.input;
 
+import de.chaffic.math.Vec2;
+import de.chaffic.rays.Slice;
 import demo.tests.ParticleExplosionTest;
 import demo.tests.ProximityExplosionTest;
 import demo.tests.RaycastExplosionTest;
 import demo.tests.SliceObjects;
 import demo.window.TestBedWindow;
-import library.math.Vec2;
-import library.rays.Slice;
 
 import javax.swing.*;
 import java.awt.event.MouseEvent;

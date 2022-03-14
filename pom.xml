@@ -36,7 +36,7 @@
         <dependency>
             <groupId>com.github.Chafficui</groupId>
             <artifactId>KPhysics</artifactId>
-            <version>363884ecb3</version>
+            <version>64f5c03505</version>
         </dependency>
     </dependencies>
 

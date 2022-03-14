@@ -1,9 +1,9 @@
 package demo.tests
 
+import de.chaffic.dynamics.World
+import de.chaffic.math.Vec2
+import de.chaffic.rays.ShadowCasting
 import demo.window.TestBedWindow
-import library.dynamics.World
-import library.math.Vec2
-import library.rays.ShadowCasting
 import java.awt.Graphics2D
 
 object LineOfSight {

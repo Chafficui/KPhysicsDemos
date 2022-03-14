@@ -1,13 +1,13 @@
 package demo.tests
 
+import de.chaffic.dynamics.Body
+import de.chaffic.dynamics.World
+import de.chaffic.geometry.Circle
+import de.chaffic.geometry.Polygon
+import de.chaffic.joints.Joint
+import de.chaffic.joints.JointToBody
+import de.chaffic.math.Vec2
 import demo.window.TestBedWindow
-import library.dynamics.Body
-import library.dynamics.World
-import library.geometry.Circle
-import library.geometry.Polygon
-import library.joints.Joint
-import library.joints.JointToBody
-import library.math.Vec2
 
 object Chains {
     @JvmField
@@ -18,9 +18,9 @@ object Chains {
         val temp = testBedWindow.world
         testBedWindow.setCamera(Vec2(.0, -50.0), 1.4)
         val b = Body(Circle(60.0), .0, .0)
-        b.setDensity(0.0)
+        b.density = (0.0)
         temp.addBody(b)
-        val maxChainLength = 10
+        val maxChainLength = 20
         val bodyList = arrayOfNulls<Body>(maxChainLength)
         for (i in 0 until maxChainLength) {
             val b2 = Body(Polygon(20.0, 5.0), -20 + 40.0 * maxChainLength / 2 - 40 * i, 200.0)

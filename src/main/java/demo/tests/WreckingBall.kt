@@ -1,13 +1,13 @@
 package demo.tests
 
+import de.chaffic.dynamics.Body
+import de.chaffic.dynamics.World
+import de.chaffic.geometry.Circle
+import de.chaffic.geometry.Polygon
+import de.chaffic.joints.Joint
+import de.chaffic.joints.JointToPoint
+import de.chaffic.math.Vec2
 import demo.window.TestBedWindow
-import library.dynamics.Body
-import library.dynamics.World
-import library.geometry.Circle
-import library.geometry.Polygon
-import library.joints.Joint
-import library.joints.JointToPoint
-import library.math.Vec2
 
 object WreckingBall {
     @JvmField
@@ -25,12 +25,12 @@ object WreckingBall {
                 }
             }
             val b = Body(Polygon(100.0, 10.0), 200.0, -20.0)
-            b.setDensity(0.0)
+            b.density = (0.0)
             temp.addBody(b)
         }
         run {
             val b2 = Body(Circle(40.0), -250.0, 320.0)
-            b2.setDensity(2.0)
+            b2.density = (2.0)
             temp.addBody(b2)
             val j: Joint = JointToPoint(b2, Vec2(.0, 320.0), 250.0, 200.0, 100.0, true, Vec2())
             temp.addJoint(j)

@@ -1,11 +1,11 @@
 package demo.tests
 
+import de.chaffic.dynamics.Body
+import de.chaffic.dynamics.World
+import de.chaffic.geometry.Circle
+import de.chaffic.geometry.Polygon
+import de.chaffic.math.Vec2
 import demo.window.TestBedWindow
-import library.dynamics.Body
-import library.dynamics.World
-import library.geometry.Circle
-import library.geometry.Polygon
-import library.math.Vec2
 
 object BouncyBall {
     @JvmField
@@ -21,7 +21,7 @@ object BouncyBall {
         bouncyBall.restitution =1.0
 
         val plattform = Body(Polygon(600.0, 20.0), .0, -300.0)
-        plattform.setDensity(.0)
+        plattform.density = (.0)
 
         world.addBody(bouncyBall)
         world.addBody(plattform)

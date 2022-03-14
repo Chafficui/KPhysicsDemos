@@ -1,11 +1,13 @@
 package demo.tests
 
+import de.chaffic.collision.Arbiter.Companion.isPointInside
+import de.chaffic.collision.bodies.CollisionBodyInterface
+import de.chaffic.dynamics.World
+import de.chaffic.dynamics.bodies.PhysicalBodyInterface
+import de.chaffic.math.Mat2
+import de.chaffic.math.Vec2
+import de.chaffic.rays.Ray
 import demo.window.TestBedWindow
-import library.collision.Arbiter.Companion.isPointInside
-import library.dynamics.World
-import library.math.Mat2
-import library.math.Vec2
-import library.rays.Ray
 
 object Raycast {
     @JvmField
@@ -22,6 +24,7 @@ object Raycast {
             isValid = true
             testBedWindow.generateBoxOfObjects()
             for (b in testBedWindow.world.bodies) {
+                if(b !is CollisionBodyInterface || b !is PhysicalBodyInterface) continue
                 if (isPointInside(b, Vec2())) {
                     isValid = false
                     testBedWindow.world.clearWorld()

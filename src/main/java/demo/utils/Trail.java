@@ -1,7 +1,7 @@
 package demo.utils;
 
-import library.dynamics.Body;
-import library.math.Vec2;
+import de.chaffic.dynamics.Body;
+import de.chaffic.math.Vec2;
 
 public class Trail {
     private final Vec2[] trailPoints;

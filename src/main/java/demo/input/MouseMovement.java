@@ -1,12 +1,12 @@
 package demo.input;
 
+import de.chaffic.explosions.ProximityExplosion;
+import de.chaffic.math.Vec2;
 import demo.tests.LineOfSight;
 import demo.tests.ProximityExplosionTest;
 import demo.tests.RaycastExplosionTest;
 import demo.tests.SliceObjects;
 import demo.window.TestBedWindow;
-import library.explosions.ProximityExplosion;
-import library.math.Vec2;
 
 import javax.swing.*;
 import java.awt.event.MouseEvent;
